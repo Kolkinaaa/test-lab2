@@ -20,8 +20,7 @@ jobs:
       - name: Coverage
         run: pip install coverage
       - name: Install Dependencies
-        run:
-          sudo apt-get install -y xvfb
+        run: sudo apt-get install -y xvfb
 
       - name: Run Tests
         run: coverage run --source=. -m unittest discover -s . -p "test_main.py"
@@ -34,9 +33,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-          
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
